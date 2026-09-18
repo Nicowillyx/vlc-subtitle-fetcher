@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>VLC Subtitle Fetcher</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f0f1a; color: #fff;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-height: 100vh; padding: 24px;
+    }
+    .card {
+      background: #1a1a2e; border-radius: 16px; padding: 28px;
+      width: 100%; max-width: 360px; text-align: center;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .icon { font-size: 44px; margin-bottom: 12px; }
+    h1 { font-size: 18px; color: #e94560; margin-bottom: 4px; }
+    p.sub { font-size: 12px; color: #8892b0; margin-bottom: 20px; }
+    .status {
+      background: rgba(255,255,255,0.03); border-radius: 10px;
+      padding: 14px; margin-bottom: 16px; min-height: 60px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      border: 1px solid transparent; font-size: 13px; line-height: 1.4;
+      transition: all 0.3s;
+    }
+    .status.loading { border-color: #e94560; }
+    .status.success { border-color: #4ecca3; }
+    .status.error { border-color: #ff6b6b; }
+    button {
+      width: 100%; padding: 12px; border: none; border-radius: 8px;
+      font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s;
+    }
+    .btn { background: #e94560; color: #fff; margin-bottom: 10px; }
+    .btn:hover { background: #ff6b81; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-secondary { background: rgba(255,255,255,0.06); color: #fff; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+    .hint { margin-top: 14px; font-size: 11px; color: #555; }
+    .settings-panel {
+      display: none; margin-top: 16px; text-align: left;
+    }
+    .settings-panel.show { display: block; }
+    label { font-size: 11px; color: #8892b0; text-transform: uppercase; letter-spacing: 0.5px; }
+    input, select {
+      width: 100%; margin: 6px 0 12px; padding: 8px 10px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; color: #fff; font-size: 13px; outline: none;
+    }
+    input:focus, select:focus { border-color: #e94560; }
+    .saved { color: #4ecca3; font-size: 12px; text-align: center; margin-top: 8px; opacity: 0; transition: 0.3s; }
+    .saved.show { opacity: 1; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">🎬</div>
+    <h1>Subtitle Fetcher</h1>
+    <p class="sub">One-click subtitles for VLC</p>
+    <div class="status" id="statusBox">👋 Ready. Play a movie and click below.</div>
+    <button class="btn" id="fetchBtn">⚡ Fetch Subtitle</button>
+    <button class="btn btn-secondary" id="settingsBtn">⚙️ Settings</button>
+
+    <div class="settings-panel" id="settingsPanel">
+      <label>OpenSubtitles API Key</label>
+      <input type="password" id="apiKey" placeholder="Paste your key">
+      <label>Language</label>
+      <select id="lang">
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="it">Italian</option>
+        <option value="pt">Portuguese</option>
+        <option value="ru">Russian</option>
+        <option value="zh">Chinese</option>
+        <option value="ja">Japanese</option>
+        <option value="ko">Korean</option>
+        <option value="ar">Arabic</option>
+        <option value="hi">Hindi</option>
+        <option value="yo">Yoruba</option>
+      </select>
+      <label>VLC HTTP URL</label>
+      <input type="text" id="vlcUrl" placeholder="http://127.0.0.1:8080">
+      <label>VLC Password</label>
+      <input type="password" id="vlcPass" placeholder="vlcpass">
+      <button class="btn" id="saveBtn" style="margin-top:4px">💾 Save</button>
+      <div class="saved" id="savedMsg">✅ Saved!</div>
+    </div>
+
+    <p class="hint">Hotkey: Ctrl + Shift + S</p>
+  </div>
+  <script src="src/renderer.js"></script>
+</body>
+</html>
