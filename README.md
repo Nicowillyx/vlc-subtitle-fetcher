@@ -156,16 +156,8 @@ subtitle-fetcher/
 ├── 📂 assets/
 │   └── icon.png                 # Tray icon
 │
-├── 📄 subtitle-fetcher.js       # Original CLI script (standalone version)
-│
-├── 📂 node_modules/             # Installed packages
-│
-└── 📄 debug-*.js                # Development test scripts
-    debug-fix.js
-    debug-hash.js
-    debug-vlc.js
-    test-download.js
-    test-key.js
+└── 📂 node_modules/             # Installed packages
+ 
 ```
 
 ---
